@@ -73,6 +73,19 @@ GROUP BY yr
 HAVING count(title)>2
 
 --Q12 List the film title and the leading actor for all of the films 'Julie Andrews' played in.
+select title, name 
+from movie left join casting 
+on movie.id = casting.movieid 
+left join actor 
+on actor.id = casting.actorid 
+where ord = 1 and
+movieid in (select movieid from casting 
+left join actor 
+on actor.id = casting.actorid where actor.name = 'Julie Andrews'
+group by movieid)
+
+(Or)
+
 SELECT title, name
   FROM movie, casting, actor
   WHERE movieid=movie.id
