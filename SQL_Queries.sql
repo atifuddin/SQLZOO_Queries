@@ -84,13 +84,11 @@ SELECT title, name
      AND name='Julie Andrews')
 
 --Q13 Obtain a list, in alphabetical order, of actors who've had at least 15 starring roles
-select  actor.name from casting left join
-actor on (actor.id = casting.actorid)
-where actorid IN
-(Select actorid from casting
-where ord = 1
-group by actorid
-having count(movieid) >= 15)
+select name from actor left join casting
+on actor.id = casting.actorid where
+ord = 1
+group by name
+having count(*) >= 15
 
 --Q14 List the films released in the year 1978 ordered by the number of actors in the cast, then by title.
 select title, count(actorid) from movie left join casting 
